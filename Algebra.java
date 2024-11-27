@@ -22,46 +22,141 @@ public class Algebra {
 		System.out.println(sqrt(263169));
    		System.out.println(sqrt(76123));
 	}  
-
+	
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2 > 0){
+		for (int i = 1; i <= x2; i++) {
+			x1++;
+		}
 	}
+	else {
+		for (int i = -1; i >= x2; i--) {
+		x1--;
+	}
+	}
+	return x1;
+}
+
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2>0) {
+			for (int i = 0; i < x2 ; i++) {
+				x1--;
+			}
+		}
+		else {
+			for (int i = 0; i > x2; i--) {
+			x1++;
+		}
+		}
+		return x1;
 	}
-
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
+		int x3 = 0 ; 
+		int zero = 0;
+		if (x1 >= 0 && x2 >= 0 ){
+			for (int i = 0; i < x2 ; i++) {
+			int sum = plus(x3, x1);   
+			x3 = sum;	
+			} 
+		}
+		else if (x1 >= 0 && x2 < 0 ){
+			 x2 = minus(zero, x2);
+			for (int i = 0; i < x2 ; i++) {
+					int sum = plus(x3, x1);   
+					x3 = sum;	
+					} 
+					x3 = minus(zero, x3);
+				}
+			
+				else if (x1 < 0 && x2 >= 0 ){
+				x1 = minus(zero , x1);
+						for (int i = 0; i < x2 ; i++) {
+						int sum = plus(x3, x1);   
+						x3 = sum;	
+						} 
+						x3 = minus(zero, x3);
+				
+			}
+			else  {
+				x2 = minus(zero, x2);
+				x1 = minus(zero, x1);
+				for (int i = 0; i < x2 ; i++) {
+				int sum = plus(x3, x1);   
+				x3 = sum;	
+				} 
+	
+			}
+			return x3;	
+		}
+		
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
-	}
+		int x3 = 1 ;
+		if (n > 0) {
+			for (int i = 0; i < n ; i++) {
+			int sum = times(x3 , x);   
+			x3 = sum;	 
+			}
+		}
+			return x3;
+		}
+	
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int count = 0; 
+		int zero = 0; 
+		boolean isNegative = (x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0);
+		if (x1 == 0 || x2 == 0) {
+			count = 0;
+		}
+		if (x1 < 0) {
+			x1 = minus(zero, x1);
+		}
+		if (x2 < 0) {
+			x2 = minus(zero, x2);
+		}
+		int sum = x2;
+		while (sum <= x1) {
+			sum = plus(sum, x2);
+			count++;
+		}
+		if (isNegative) {
+			count = minus(zero, count);
+		}
+
+		return count;
 	}
+		
+		
+	
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		 int x3 = div(x1, x2); 
+		 int sum = 0 ;
+		 if (x1 - x2 * x3 == 0 ){
+		 return 0;
+		 }
+		 else {
+		 sum = x1 - x2 * x3;
+		 }
+		return sum;
+		
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
-	}	  	  
-}
+		int root = 0;
+		int sum = 0 ;
+		while (sum <= x) { 
+			root++;
+			sum = times(root, root);
+		}
+		return root -1;
+	}
+}  
