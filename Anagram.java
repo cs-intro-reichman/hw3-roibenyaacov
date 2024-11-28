@@ -40,7 +40,7 @@ public class Anagram {
 			if (index == -1) {
 				return false;  
 			}
-			newString = newString.substring(index) + newString.substring(index + 1);
+			newString = newString.substring (0, index) + newString.substring(index + 1);
 			
 		}
 		return true;
@@ -54,12 +54,11 @@ public class Anagram {
 		char c; 
 		for (int i = 0; i < str.length(); i++) {
 			c = str.charAt(i);
-			if ( c >= 97 && c <= 122) {
+			if ( c >= 'a' && c <= 'z') {
 				beforeStr += c; 
 			}
 			if (c >= 'A' && c <= 'Z') {
-				c = (char) (c + 32); 
-				beforeStr += c;
+				beforeStr += (char) (c + 32) ;
 			}
 			if (c == ' '){
 				beforeStr += c;
@@ -82,7 +81,7 @@ public class Anagram {
 			str = str.substring(0, randomIndex) + str.substring(randomIndex + 1); 
 	
 		}
-		return "";
+		return buildAna;
 	}
 }
 
