@@ -25,8 +25,6 @@ public class LoanCalc {
 		System.out.println("number of iterations: " + iterationCounter);
 		
 		
-		double x1= endBalance(100000, 5, 10, 10000);
-		System.out.println(x1);
 	}
 
 	// Computes the ending balance of a loan, given the loan amount, the periodical
@@ -67,17 +65,25 @@ public class LoanCalc {
 		double H = loan;
 		double M = (L+H)/2;
 		iterationCounter = 0; 
-		while ((H - L)> epsilon) { 
-			if ((endBalance(loan, rate, n, M)) * endBalance(loan, rate, n, L) > 0) {
-				L = M ; 
+		
+		while ((H - L) > epsilon) { 
+			double endBalanceM = endBalance(loan, rate, n, M);
+        	double endBalanceL = endBalance(loan, rate, n, L); 
+			if (Math.abs(endBalanceM) <= epsilon){
+			return M;
+			}
+			else if ((endBalanceM * endBalanceL) > 0) {
+				L = M; 
 			}
 			else {
 				H = M;
-				M = (L+H)/2;
+				
 			}
+			M = (L+H)/2;
 			iterationCounter++;
 		}
 		return M ; 
 	
     }
 }
+
