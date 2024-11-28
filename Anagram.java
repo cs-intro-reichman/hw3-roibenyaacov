@@ -28,60 +28,63 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		 str1 = preProcess(str1); 
-		 str2 = preProcess(str2); 
-		if (str1.length() != str2.length()) {
-			return false;
+		str1 = preProcess(str1); 
+        str2 = preProcess(str2); 
+
+   
+        String newString = ""; 
+        for (int i = 0; i < str2.length(); i++) {
+            if (str2.charAt(i) != ' ') { 
+                newString += str2.charAt(i);
+            }
+        }
+        for (int i = 0; i < str1.length(); i++) {
+            char c = str1.charAt(i);
+            if (c == ' ') continue; 
+            int index = newString.indexOf(c); 
+            if (index == -1) {
+                return false; 
+            }
+            newString = newString.substring(0, index) + newString.substring(index + 1); 
 		}
-		String newString = str2; 
-		for (int i = 0; i < str1.length(); i++) {
-			char c = str1.charAt(i);
-			int index = newString.indexOf(c);
-			if (index == -1) {
-				return false;  
-			}
-			newString = newString.substring (0, index) + newString.substring(index + 1);
-			
-		}
-		return true;
-	}
-	   
+		return false;
+		}	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		String beforeStr = "";
-		char c; 
-		for (int i = 0; i < str.length(); i++) {
-			c = str.charAt(i);
-			if ( c >= 'a' && c <= 'z') {
-				beforeStr += c; 
-			}
-			if (c >= 'A' && c <= 'Z') {
-				beforeStr += (char) (c + 32) ;
-			}
-			if (c == ' '){
-				beforeStr += c;
-			}
-			
-		}
-		return beforeStr;
-	} 
+		String beforeStr = ""; 
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c >= 'A' && c <= 'Z') { 
+                beforeStr += (char) (c + 32); 
+            } else if (c >= 'a' && c <= 'z') { 
+                beforeStr += c; 
+            } else if (c == ' ') { 
+                beforeStr += c;
+            }
+        }
+        return beforeStr; 
+    }
+
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		str = preProcess(str);
-		String buildAna = "";
-
-		while (str.length() > 0) {
-			int randomIndex = (int) (Math.random() * str.length()); 
-			char randomChar = str.charAt(randomIndex); 
-			buildAna += randomChar; 
-			str = str.substring(0, randomIndex) + str.substring(randomIndex + 1); 
-	
-		}
-		return buildAna;
-	}
+		str = preProcess(str); 
+        String newString = ""; 
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != ' ') { 
+                newString += str.charAt(i);
+            }
+        }
+        String beforeStr = ""; 
+        while (newString.length() > 0) {
+            int randomIndex = (int) (Math.random() * newString.length()); 
+            char randomChar = newString.charAt(randomIndex); 
+            beforeStr += randomChar; 
+            newString = newString.substring(0, randomIndex) + newString.substring(randomIndex + 1); 
+        }
+        return beforeStr; 
+    }
 }
-
